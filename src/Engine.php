@@ -74,7 +74,7 @@ class Engine
 
 		// Get controller
 		require_once(  self::$controllers_path . $compo[0] . '.php' );
-		$classname = sprintf( $namespace . '\Controllers\%s', $compo[0]);
+		$classname = sprintf( self::$namespace . '\controllers\%s', $compo[0]);
 		$controller = new $classname();
 
 		if ( !method_exists( $controller, $compo[1] ) ) {
