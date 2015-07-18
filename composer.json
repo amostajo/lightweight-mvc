@@ -1,0 +1,21 @@
+{
+    "name": "amostajo/lightweight-mvc",
+    "description": "A light weight (small) MVC framework for Wordpress plugins and themes.",
+    "license": "MIT",
+    "keywords": ["wordpress","mvc","lightweight","light"],
+    "authors": [
+        {
+            "name": "Alejandro Mostajo",
+            "email": "amostajo@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Amostajo\\LightweightMVC\\": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}
