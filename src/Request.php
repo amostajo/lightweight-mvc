@@ -15,12 +15,13 @@ class Request
 	/**
 	 * Gets input from either wordpress query vars or request's POST or GET.
 	 *
-	 * @param string $key  		Name of the input.
+	 * @param string $key  	  Name of the input.
 	 * @param mixed  $default Default value if data is not found.
+	 * @param bool   $Clear   Clears out source value.
 	 *
 	 * @return mixed
 	 */
-	public static function input ( $key, $default = null )
+	public static function input ( $key, $default = null, $clear = false )
 	{
 		global $wp_query;
 
@@ -31,13 +32,19 @@ class Request
 
 			$value = trim( $wp_query->query_vars[$key] );
 
+			if ( $clear ) unset( $wp_query->query_vars[$key] );
+
 		} else if ( $_POST && array_key_exists( $key, $_POST ) ) {
 
 			$value = trim( $_POST[$key] );
 
+			if ( $clear ) unset( $_POST[$key] );
+
 		} else if ( array_key_exists( $key, $_GET ) ) {
 
 			$value = trim( $_GET[$key] );
+
+			if ( $clear ) unset( $_GET[$key] );
 
 		}
 
