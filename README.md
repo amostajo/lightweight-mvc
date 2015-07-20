@@ -396,7 +396,11 @@ Amostajo\LightweightMVC\View::show( 'books.profile', ['book' => Book::find( $boo
 
 ### Helpers
 
+This package comes with a request class helper, to retrieve values from GET, POST or WORDPRESS' query_vars:
 
+```php
+$name = Amostajo\LightweightMVC\Request::input( 'name', $default_value );
+```
 
 ## Coding Guidelines
 
