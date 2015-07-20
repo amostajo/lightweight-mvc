@@ -1,7 +1,7 @@
 # LIGHTWEIGHT MVC (For Wordpress plugins and themes)
 --------------------------------
 
-**Lightweight MVC** is a small framework that adds *Models*, *Views* and *Controllers* in your custom plugin or theme.
+**Lightweight MVC** is a small framework that adds *Models*, *Views* and *Controllers* to your custom plugin or theme.
 
 Lightweight MVC utilices existing Wordpress functionality preventing from overloading the already heavy loaded Wordpress core.
 
@@ -10,12 +10,13 @@ This framework was inspired by **Laravel** to add the MVC design pattern to Word
 - [Requirements](#requirements)
 - [Configuration](#configuration)
 - [Usage](#usage)
-    -[Models](#models)
-    	-[Aliases](#aliases)
-    	-[Types](#types)
-    -[Views](#views)
-    -[Controllers](#controllers)
-    -[Engine](#engine)
+    - [Models](#models)
+        - [Aliases](#aliases)
+        - [Types](#types)
+    - [Views](#views)
+    - [Controllers](#controllers)
+    - [Engine](#engine)
+    - [Helpers](#helpers)
 - [Coding Guidelines](#coding-guidelines)
 - [License](#license)
 
@@ -27,10 +28,10 @@ This framework was inspired by **Laravel** to add the MVC design pattern to Word
 
 Your project needs to store somewhere your `Models`, `Views` and `Controllers`, and **Lightweight MVC** must know where.
 
-Create these as folders, something like this will work:
+Create these as folders, like this:
 
 ```bash
-[ROOT]
+[PROJECT ROOT]
  |---> [controllers]
  |---> [models]
  |---> [views]
@@ -77,7 +78,7 @@ With just that, you will be able to do this:
 ```php
 $post = new MyApp\Models\Post();
 
-$post->title = 'New post';
+$post->post_title = 'New post';
 $post->save(); // New inserts.
 
 // Find and get post model from id.
@@ -392,6 +393,10 @@ $json = Amostajo\LightweightMVC\Engine::action( 'BookController@display_json', $
 // Echo a view directly
 Amostajo\LightweightMVC\View::show( 'books.profile', ['book' => Book::find( $book_id )] );
 ```
+
+### Helpers
+
+
 
 ## Coding Guidelines
 
