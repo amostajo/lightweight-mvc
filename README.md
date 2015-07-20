@@ -41,13 +41,17 @@ Then in your `functions.php` or `plugins.php` file set these at the very beginnn
 
 ```php
 // Path to the controllers folder.
-Amostajo\LightweightMVC\Engine::$controllers_path = 'path_to_controllers_folder';
+$engine = new Amostajo\LightweightMVC\Engine(
 
-// Namespace of your plugin or theme.
-Amostajo\LightweightMVC\Engine::$namespace = 'MyApp';
+	// Path to the views folder.
+	$views_path = 'path_to_views_folder',
 
-// Path to the views folder.
-Amostajo\LightweightMVC\View::$views_path = 'path_to_views_folder';
+	// Path to the controllers folder.
+	$controllers_path = 'path_to_controllers_folder',
+
+	// Namespace of your plugin or theme. For controller access
+	$namespace = 'MyApp'
+);
 ```
 
 **NOTE** If you are not using composer to download this framework, you will have to load the files manually since not autoload will be generated.
@@ -350,7 +354,7 @@ class BookController extends Controller
 
 		// (1) Indicates which View to return
 		// (2) We pass $book_model to the view as 'book'
-		return View::get( 'books.profile', [
+		return $this->view->get( 'books.profile', [
 			'book' => $book_model,
 		] );
 	}
@@ -380,7 +384,7 @@ Once you have everything in order, you can use the framework as following (using
 // Parameters passed by: $book_id
 //
 // call function will echo the result.
-Amostajo\LightweightMVC\Engine::call( 'BookController@display_view', $book_id );
+$engine->call( 'BookController@display_view', $book_id );
 
 // Calls:
 // Controller: BookController
@@ -388,10 +392,10 @@ Amostajo\LightweightMVC\Engine::call( 'BookController@display_view', $book_id );
 // Parameters passed by: $book_id
 //
 // action function will return the result.
-$json = Amostajo\LightweightMVC\Engine::action( 'BookController@display_json', $book_id );
+$json = $engine->action( 'BookController@display_json', $book_id );
 
 // Echo a view directly
-Amostajo\LightweightMVC\View::show( 'books.profile', ['book' => Book::find( $book_id )] );
+$engine->view->show( 'books.profile', ['book' => Book::find( $book_id )] );
 ```
 
 ### Helpers

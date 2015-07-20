@@ -16,7 +16,18 @@ class View
 	 * Path to where controllers are.
 	 * @var string
 	 */
-	public static $views_path;
+	protected $views_path;
+
+	/**
+ 	 * Default engine constructor.
+ 	 *
+ 	 * @param string $controllers_path
+ 	 * @param string $namespace
+	 */
+	public function __construct( $views_path )
+	{
+		$this->views_path = $views_path;
+	}
 
 	/**
 	 * Returns view with the parameters passed by.
@@ -26,13 +37,13 @@ class View
 	 *
 	 * @return string
 	 */
-	public static function get( $view, $params = array() )
+	public function get( $view, $params = array() )
 	{
 		$template = preg_replace( '/\./', '/', $view );
 
 		$theme_path =  get_template_directory() . '/views/' . $template . '.php';
 
-		$plugin_path = self::$views_path . $template . '.php';
+		$plugin_path = $this->views_path . $template . '.php';
 
 		$path = is_readable( $theme_path )
 			? $theme_path
@@ -57,8 +68,8 @@ class View
 	 * @param string $view   Name and location of the view within "theme/lucyvegas/views" path.
 	 * @param array  $params View parameters passed by.
 	 */
-	public static function show( $view, $params = array() )
+	public function show( $view, $params = array() )
 	{
-		echo View::get( $view, $params );
+		echo $this->get( $view, $params );
 	}
 }

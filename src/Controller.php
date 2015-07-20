@@ -16,12 +16,21 @@ abstract class Controller
 	 * @var object
 	 */
 	protected $user;
+
+	/**
+	 * View class object.
+	 * @var object
+	 */
+	protected $view;
 	
 	/**
 	 * Default construct.
+	 *
+	 * @param object $view View class object.
 	 */
-	public function __construct()
+	public function __construct( $view )
 	{
 		$this->user = \get_userdata( get_current_user_id() );
+		$this->view = $view;
 	}
 }

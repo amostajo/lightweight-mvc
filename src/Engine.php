@@ -17,13 +17,33 @@ class Engine
 	 * Path to where controllers are.
 	 * @var string
 	 */
-	public static $controllers_path;
+	protected $controllers_path;
 
 	/**
 	 * Plugin namespace.
 	 * @var string
 	 */
-	public static $namespace;
+	protected $namespace;
+
+	/**
+	 * View class object.
+	 * @var string
+	 */
+	protected $view;
+
+
+	/**
+ 	 * Default engine constructor.
+ 	 *
+ 	 * @param string $controllers_path
+ 	 * @param string $namespace
+	 */
+	public function __construct( $views_path, $controllers_path, $namespace )
+	{
+		$this->controllers_path = $controllers_path;
+		$this->namespace = $namespace;
+		$this->view = new View( $views_path );
+	}
 
 	/**
 	 * Calls controller and function.
@@ -31,13 +51,13 @@ class Engine
 	 *
 	 * @param string $controller_name Controller name and method. i.e. DealController@show
 	 */
-	public static function call( $controller_name ) 
+	public function call( $controller_name ) 
 	{
 		$args = func_get_args();
 
 		unset( $args[0] );
 
-		echo self::exec( $controller_name, $args );
+		echo $this->exec( $controller_name, $args );
 	}
 
 	/**
@@ -45,13 +65,13 @@ class Engine
 	 *
 	 * @param string $controller_name Controller name and method. i.e. DealController@show
 	 */
-	public static function action( $controller_name ) 
+	public function action( $controller_name ) 
 	{
 		$args = func_get_args();
 
 		unset( $args[0] );
 
-		return self::exec( $controller_name, $args );
+		return $this->exec( $controller_name, $args );
 	}
 
 	/**
@@ -61,7 +81,7 @@ class Engine
 	 * @param string $controller_name Controller name and method. i.e. DealController@show
 	 * @param array  $args 		      Controller parameters.
 	 */
-	public static function exec( $controller_name, $args )
+	private function exec( $controller_name, $args )
 	{
 		// Process controller
 		$compo = explode( '@', $controller_name );
@@ -73,9 +93,9 @@ class Engine
 		}
 
 		// Get controller
-		require_once(  self::$controllers_path . $compo[0] . '.php' );
-		$classname = sprintf( self::$namespace . '\controllers\%s', $compo[0]);
-		$controller = new $classname();
+		require_once(  $this->controllers_path . $compo[0] . '.php' );
+		$classname = sprintf( $this->namespace . '\controllers\%s', $compo[0]);
+		$controller = new $classname( $this->view );
 
 		if ( !method_exists( $controller, $compo[1] ) ) {
 
