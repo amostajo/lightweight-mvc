@@ -1,13 +1,18 @@
 # LIGHTWEIGHT MVC (For Wordpress plugins and themes)
 --------------------------------
 
-**Lightweight MVC** is a small framework that adds *Models*, *Views* and *Controllers* to your custom plugin or theme.
+[![Latest Stable Version](https://poser.pugx.org/amostajo/lightweight-mvc/v/stable)](https://packagist.org/packages/amostajo/lightweight-mvc)
+[![Total Downloads](https://poser.pugx.org/amostajo/lightweight-mvc/downloads)](https://packagist.org/packages/amostajo/lightweight-mvc)
+[![License](https://poser.pugx.org/amostajo/lightweight-mvc/license)](https://packagist.org/packages/amostajo/lightweight-mvc)
+
+**Lightweight MVC** is a small framework that adds *Models*, *Views* and *Controllers* to your custom **Wordpress** plugin or theme.
 
 Lightweight MVC utilices existing Wordpress functionality preventing from overloading the already heavy loaded Wordpress core.
 
 This framework was inspired by **Laravel** to add the MVC design pattern to Wordpress development in an efficient, elegant and optimized way.
 
 - [Requirements](#requirements)
+- [Installation](#configuration)
 - [Configuration](#configuration)
 - [Usage](#usage)
     - [Models](#models)
@@ -23,6 +28,18 @@ This framework was inspired by **Laravel** to add the MVC design pattern to Word
 ## Requirements
 
 * PHP >= 5.5.9
+
+## Installation
+
+Add
+
+```json
+"amostajo/lightweight-mvc": "1.0.*"
+```
+
+to your composer.json. Then run `composer install` or `composer update`.
+
+**NOTE** If you are not using composer, you can download the ZIP but will need to include the files manually since not autoload will be generated.
 
 ## Configuration
 
@@ -53,8 +70,6 @@ $engine = new Amostajo\LightweightMVC\Engine(
 	$namespace = 'MyApp'
 );
 ```
-
-**NOTE** If you are not using composer to download this framework, you will have to load the files manually since not autoload will be generated.
 
 ## Usage
 
@@ -404,6 +419,12 @@ This package comes with a request class helper, to retrieve values from GET, POS
 
 ```php
 $name = Amostajo\LightweightMVC\Request::input( 'name', $default_value );
+```
+
+Third value will clear the source value, great to prevent loop wholes with NONCE:
+
+```php
+$nonce = Amostajo\LightweightMVC\Request::input( 'my_nonce', $default_value, $clear_source = true );
 ```
 
 ## Coding Guidelines
