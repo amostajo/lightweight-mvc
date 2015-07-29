@@ -27,7 +27,7 @@ This framework was inspired by **Laravel** to add the MVC design pattern to Word
 
 ## Requirements
 
-* PHP >= 5.5.9
+* PHP >= 5.3.0
 
 ## Installation
 
@@ -142,10 +142,10 @@ class Post extends Model
 {
 	use FindTrait;
 
-	protected $aliases = [
+	protected $aliases = array(
 		'title'		=> 'post_title',
 		'content'	=> 'post_content',
-	];
+	);
 }
 
 ```
@@ -176,11 +176,11 @@ class Post extends Model
 {
 	use FindTrait;
 
-	protected $aliases = [
+	protected $aliases = array(
 		'title'		=> 'post_title',
 		'content'	=> 'post_content',
 		'price'		=> 'meta_price', // Meta key "price"
-	];
+	);
 }
 ```
 
@@ -210,12 +210,12 @@ class Post extends Model
 {
 	use FindTrait;
 
-	protected $aliases = [
+	protected $aliases = array(
 		'title'		=> 'post_title',
 		'content'	=> 'post_content',
 		'price'		=> 'meta_price',
 		'is_free'	=> 'func_is_free',
-	];
+	);
 
 	protected function is_free()
 	{
@@ -266,12 +266,12 @@ class Book extends Model
 	 */
 	protected $status = 'publish';
 
-	protected $aliases = [
+	protected $aliases = array(
 		'title'			=> 'post_title',
 		'description'	=> 'post_content',
 		'year'			=> 'meta_year',
 		'publisher'		=> 'meta_publisher',
-	];
+	);
 }
 ```
 
@@ -369,9 +369,9 @@ class BookController extends Controller
 
 		// (1) Indicates which View to return
 		// (2) We pass $book_model to the view as 'book'
-		return $this->view->get( 'books.profile', [
+		return $this->view->get( 'books.profile', array(
 			'book' => $book_model,
-		] );
+		) );
 	}
 
 	/**
@@ -410,7 +410,7 @@ $engine->call( 'BookController@display_view', $book_id );
 $json = $engine->action( 'BookController@display_json', $book_id );
 
 // Echo a view directly
-$engine->view->show( 'books.profile', ['book' => Book::find( $book_id )] );
+$engine->view->show( 'books.profile', array('book' => Book::find( $book_id )) );
 ```
 
 ### Helpers
