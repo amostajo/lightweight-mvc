@@ -2,6 +2,8 @@
 
 namespace Amostajo\LightweightMVC\Traits;
 
+use Amostajo\LightweightMVC\Collection as Collection;
+
 /**
  * Trait related to all find functionality of a model.
  *
@@ -33,7 +35,7 @@ trait FindTrait
 	{
 		if ( empty( $id ) ) return;
 
-		$output = new \HumbleBundle\MVC\Collection();
+		$output = new Collection();
 
 		$reference = new self();
 
