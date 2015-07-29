@@ -27,7 +27,7 @@ This framework was inspired by **Laravel** to add the MVC design pattern to Word
 
 ## Requirements
 
-* PHP >= 5.3.0
+* PHP >= 5.4.0
 
 ## Installation
 
