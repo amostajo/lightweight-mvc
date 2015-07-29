@@ -26,18 +26,24 @@ class Collection extends ArrayObject implements Sortable, JSONable, Stringable
 	 */
 	public function sort_by( $attribute, $sort_flag = SORT_REGULAR )
 	{
-		$attributes = array();
+		$values = array();
 
 		for ( $i = count( $this ) -1; $i >= 0; --$i ) {
-			$attributes[$this[$i]->$attribute] = $this[$i];
+			$values[] = $this[$i]->$attribute;
 		}
 
-		ksort( $attributes );
+		$values = array_unique($values);
+
+		sort( $values, $sort_flag );
 
 		$new = new self();
 
-		foreach ( $attributes as $key => $value ) {
-			$new[] = $value;
+		foreach ( $values as $value ) {
+			for ( $i = count( $this ) -1; $i >= 0; --$i ) {
+				if ( $value == $this[$i]->$attribute ) {
+					$new[] = $this[$i];
+				}
+			}
 		}
 
 		return $new;
