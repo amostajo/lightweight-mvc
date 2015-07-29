@@ -92,7 +92,7 @@ class Engine
 
 		// Get controller
 		require_once(  $this->controllers_path . $compo[0] . '.php' );
-		$classname = sprintf( $this->namespace . '\controllers\%s', $compo[0]);
+		$classname = sprintf( $this->namespace . '\Controllers\%s', $compo[0]);
 		$controller = new $classname( $this->view );
 
 		if ( !method_exists( $controller, $compo[1] ) ) {
