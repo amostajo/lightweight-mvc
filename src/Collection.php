@@ -50,6 +50,31 @@ class Collection extends ArrayObject implements Sortable, JSONable, Stringable
 	}
 
 	/**
+	 * Groups collection by attribute name,
+	 *
+	 * @param string $attribute Attribute to group by.
+	 *
+	 * @return this for chaining
+	 */
+	public function group_by( $attribute )
+	{
+		$new = new self();
+
+		for ( $i = 0; $i < count( $this ); ++$i ) {
+
+			$key = (string)$this[$i]->$attribute; 
+
+			if ( ! isset( $new[$key] ) )
+				$new[$key] = new self();
+
+			$new[$key][] = $this[$i];
+
+		}
+
+		return $new;
+	}
+
+	/**
 	 * Returns json string.
 	 *
 	 * @param string
