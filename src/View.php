@@ -32,7 +32,7 @@ class View
 	/**
 	 * Returns view with the parameters passed by.
 	 *
-	 * @param string $view   Name and location of the view within "theme/lucyvegas/views" path.
+	 * @param string $view   Name and location of the view within "theme/views" path.
 	 * @param array  $params View parameters passed by.
 	 *
 	 * @return string
@@ -65,7 +65,7 @@ class View
 	/**
 	 * Displays view with the parameters passed by.
 	 *
-	 * @param string $view   Name and location of the view within "theme/lucyvegas/views" path.
+	 * @param string $view   Name and location of the view within "theme/views" path.
 	 * @param array  $params View parameters passed by.
 	 */
 	public function show( $view, $params = array() )

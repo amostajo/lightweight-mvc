@@ -103,4 +103,23 @@ class Engine
 
 		return call_user_func_array( [ $controller, $compo[1] ], $args );
 	}
+
+	/**
+	 * Getter function.
+	 *
+	 * @param string $property
+	 *
+	 * @return mixed
+	 */
+	public function __get( $property )
+	{
+		switch ($property) {
+
+			case 'view':
+				return $this->$property;
+
+		}
+
+		return null;
+	}
 }
