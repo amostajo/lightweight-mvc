@@ -100,6 +100,8 @@ trait MetaTrait
 	 */
 	public function save_meta( $key, $value, $update_array = true )
 	{
+		if ( preg_match( '/_wp_/', $key ) ) return;
+		
 		if ( $update_array )
 			$this->meta[$key] = $value;
 
