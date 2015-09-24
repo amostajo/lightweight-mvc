@@ -25,11 +25,16 @@ trait MetaTrait
 		if ( empty( $this->attributes ) ) return;
 
 		foreach ( get_post_meta( $this->attributes['ID'] ) as $key => $value ) {
-			if ( ! preg_match( '/_wp_/', $key ) ) {
+			if ( ! preg_match( '/_wp_/', $key )
+				|| in_array( 'meta_' . $key, $this->aliases )
+			) {
 				$value = $value[0];
 
 				$this->meta[$key] = is_string( $value )
-					? json_decode( $value )
+					? ( preg_match( '/_wp_/', $key )
+						? $value
+						: json_decode( $value )
+					)
 					: ( is_integer( $value )
 						? intval( $value )
 						: floatval( $value )
