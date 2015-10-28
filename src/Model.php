@@ -20,7 +20,7 @@ use Amostajo\LightweightMVC\Traits\CastTrait as CastTrait;
  * @license MIT
  * @package Amostajo\LightweightMVC
  */
-abstract class Model implements Modelable, Findable, Metable, Parentable, PostCastable, Arrayable, JSONable,Stringable
+abstract class Model implements Modelable, Findable, Metable, Parentable, PostCastable, Arrayable, JSONable, Stringable
 {
 	use MetaTrait, CastTrait;
 
@@ -29,6 +29,7 @@ abstract class Model implements Modelable, Findable, Metable, Parentable, PostCa
 	 * @var string
 	 */
 	protected $type = 'post';
+
 	/**
 	 * Default post status.
 	 * @var string
@@ -52,6 +53,12 @@ abstract class Model implements Modelable, Findable, Metable, Parentable, PostCa
 	 * @var array
 	 */
 	protected $aliases = array();
+
+	/**
+	 * Attributes and aliases hidden from print.
+	 * @var array
+	 */
+	protected $hidden = array();
 
 	/**
 	 * Default constructor.
@@ -99,7 +106,7 @@ abstract class Model implements Modelable, Findable, Metable, Parentable, PostCa
 
 		return $error === false ? true : $error;
 	}
-	
+
 	/**
 	 * Deletes current model in the db.
 	 *
@@ -223,6 +230,11 @@ abstract class Model implements Modelable, Findable, Metable, Parentable, PostCa
 				$function_name = preg_replace( '/func_/', '', $property );
 				$output[$alias] = $this->$function_name();
 			}
+		}
+
+		// Hidden
+		foreach ( $this->hidden as $key ) {
+			unset( $output[$key] );
 		}
 
 		return $output;

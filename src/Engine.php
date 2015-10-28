@@ -49,7 +49,7 @@ class Engine
 	 *
 	 * @param string $controller_name Controller name and method. i.e. DealController@show
 	 */
-	public function call( $controller_name ) 
+	public function call( $controller_name )
 	{
 		$args = func_get_args();
 
@@ -63,7 +63,7 @@ class Engine
 	 *
 	 * @param string $controller_name Controller name and method. i.e. DealController@show
 	 */
-	public function action( $controller_name ) 
+	public function action( $controller_name )
 	{
 		$args = func_get_args();
 
@@ -87,7 +87,7 @@ class Engine
 		if ( count( $compo ) <= 1 ) {
 
 			throw new Exception( sprintf( 'Controller action must be defined in %s.', $controller_name ) );
-			
+
 		}
 
 		// Get controller
@@ -98,7 +98,7 @@ class Engine
 		if ( !method_exists( $controller, $compo[1] ) ) {
 
 			throw new Exception( sprintf( 'Controller action "%s" not found in %s.', $compo[1], $compo[0] ) );
-			
+
 		}
 
 		return call_user_func_array( [ $controller, $compo[1] ], $args );
