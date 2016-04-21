@@ -8,23 +8,27 @@ namespace Amostajo\LightweightMVC;
  * @author Alejandro Mostajo
  * @license MIT
  * @package Amostajo\LightweightMVC
+ * @version 1.0.2
  */
 class Engine
 {
 	/**
 	 * Path to where controllers are.
+	 * @since 1.0.0
 	 * @var string
 	 */
 	protected $controllers_path;
 
 	/**
 	 * Plugin namespace.
+	 * @since 1.0.0
 	 * @var string
 	 */
 	protected $namespace;
 
 	/**
 	 * View class object.
+	 * @since 1.0.0
 	 * @var string
 	 */
 	protected $view;
@@ -32,6 +36,7 @@ class Engine
 
 	/**
  	 * Default engine constructor.
+	 * @since 1.0.0
  	 *
  	 * @param string $controllers_path
  	 * @param string $namespace
@@ -46,6 +51,7 @@ class Engine
 	/**
 	 * Calls controller and function.
 	 * Echos return.
+	 * @since 1.0.0
 	 *
 	 * @param string $controller_name Controller name and method. i.e. DealController@show
 	 */
@@ -59,9 +65,25 @@ class Engine
 	}
 
 	/**
-	 * Returns controller results.
+	 * Calls controller and function. With arguments are passed by.
+	 * Echos return.
+	 * @since 1.0.2
 	 *
 	 * @param string $controller_name Controller name and method. i.e. DealController@show
+	 * @param array  $args			  Function args passed by. Arguments ready for call_user_func_array call.
+	 */
+	public function call_args( $controller_name, $args )
+	{
+		echo $this->exec( $controller_name, $args );
+	}
+
+	/**
+	 * Returns controller results.
+	 * @since 1.0.0
+	 *
+	 * @param string $controller_name Controller name and method. i.e. DealController@show
+	 *
+	 * @return mixed
 	 */
 	public function action( $controller_name )
 	{
@@ -73,8 +95,23 @@ class Engine
 	}
 
 	/**
+	 * Returns controller results. With arguments are passed by.
+	 * @since 1.0.2
+	 *
+	 * @param string $controller_name Controller name and method. i.e. DealController@show
+	 * @param array  $args			  Function args passed by. Arguments ready for call_user_func_array call.
+	 *
+	 * @return mixed
+	 */
+	public function action_args( $controller_name, $args )
+	{
+		return $this->exec( $controller_name, $args );
+	}
+
+	/**
 	 * Executes controller.
 	 * Returns result.
+	 * @since 1.0.0
 	 *
 	 * @param string $controller_name Controller name and method. i.e. DealController@show
 	 * @param array  $args 		      Controller parameters.
@@ -106,6 +143,7 @@ class Engine
 
 	/**
 	 * Getter function.
+	 * @since 1.0.1
 	 *
 	 * @param string $property
 	 *
