@@ -8,17 +8,20 @@ namespace Amostajo\LightweightMVC\Traits;
  * @author Alejandro Mostajo
  * @license MIT
  * @package Amostajo\LightweightMVC
+ * @version 1.0.1
  */
 trait MetaTrait
 {
 	/**
 	 * Meta data.
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $meta = array();
 
 	/**
 	 * Loads meta values into objet.
+	 * @since 1.0.0
 	 */
 	public function load_meta()
 	{
@@ -45,6 +48,7 @@ trait MetaTrait
 
 	/**
 	 * Returns flag indicating if object has meta key.
+	 * @since 1.0.0
 	 *
 	 * @param string $key Key.
 	 *
@@ -57,6 +61,7 @@ trait MetaTrait
 
 	/**
 	 * Sets meta value.
+	 * @since 1.0.0
 	 *
 	 * @param string $key   Key.
 	 * @param mixed  $value Value.
@@ -68,6 +73,7 @@ trait MetaTrait
 
 	/**
 	 * Gets value from meta.
+	 * @since 1.0.0
 	 *
 	 * @param string $key Key.
 	 *
@@ -79,7 +85,8 @@ trait MetaTrait
 	}
 
 	/**
-	 * Deletes meta..
+	 * Deletes meta.
+	 * @since 1.0.0
 	 *
 	 * @param string $key Key.
 	 */
@@ -94,6 +101,8 @@ trait MetaTrait
 
 	/**
 	 * Either adds or updates a meta.
+	 * @since 1.0.0
+	 * @since 1.0.1 Hot fix, saves only registered meta.
 	 *
 	 * @param string $key   Key.
 	 * @param mixed  $value Value.
@@ -101,6 +110,8 @@ trait MetaTrait
 	public function save_meta( $key, $value, $update_array = true )
 	{
 		if ( preg_match( '/_wp_/', $key ) ) return;
+
+		if ( ! in_array( 'meta_' . $key, $this->aliases ) ) return;
 		
 		if ( $update_array )
 			$this->meta[$key] = $value;
@@ -116,6 +127,7 @@ trait MetaTrait
 
 	/**
 	 * Saves all meta values.
+	 * @since 1.0.0
 	 */
 	public function save_meta_all()
 	{
