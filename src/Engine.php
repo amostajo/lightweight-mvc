@@ -2,6 +2,8 @@
 
 namespace Amostajo\LightweightMVC;
 
+use Exception;
+
 /**
  * MVC mini engine.
  *
