@@ -121,7 +121,7 @@ trait MetaTrait
 			$key,
 			is_numeric( $value )
 				? $value
-				: json_encode( $value )
+				: json_encode( $value, JSON_HEX_APOS )
 		);
 	}
 
